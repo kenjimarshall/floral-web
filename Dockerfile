@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     nodejs \
     npm \
+    ghostscript \
+    inkscape \
     && rm -rf /var/lib/apt/lists/*
 
 # Install gemini-cli globally

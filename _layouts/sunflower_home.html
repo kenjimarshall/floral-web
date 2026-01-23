@@ -5,6 +5,11 @@ layout: default
 {% include base_path %}
 
 <style>
+  /* Shared color palette */
+  :root {
+    --accent-yellow: #FFD600;
+    --pale-yellow: #FFF9C4;
+  }
   /* Force Hide Masthead/Sidebar globally for this layout */
   .masthead, .sidebar, .page__footer {
     display: none !important;
@@ -25,6 +30,51 @@ layout: default
   /* =========================================
      DESKTOP SUNFLOWER STYLES
      ========================================= */
+
+  .site-header {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .site-greeting {
+    font-family: 'Crimson Text', 'EB Garamond', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #000000;
+    letter-spacing: 2px;
+    margin: 0;
+    opacity: 1;
+    transition: opacity 0.4s ease, color 0.4s ease;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+  }
+
+  .site-greeting .heart {
+    display: inline-block;
+    color: #d4a5a5;
+    font-style: normal;
+    opacity: 0.7;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+  }
+
+  .site-greeting:hover .heart {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  [data-theme="dark"] .site-greeting {
+    color: #c9c9c9;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  [data-theme="dark"] .site-greeting .heart {
+    color: #d4a5a5;
+  }
   .sunflower-desktop-wrapper {
     display: none;
     flex-direction: column;
@@ -33,23 +83,24 @@ layout: default
     width: 100%;
     height: 100vh; 
     padding: 0;
+    margin-top: -120px; 
     position: relative;
-    background-color: var(--global-bg-color, #FDFCF5);
+    background-color: var(--global-bg-color);
     overflow: hidden; 
     transition: background-color 0.5s ease;
   }
 
-  [data-theme="dark"] .sunflower-desktop-wrapper {
-    background-color: #000000;
-  }
+  <!-- [data-theme="dark"] .sunflower-desktop-wrapper {
+    background-color: var(--global-bg-color);
+  } -->
   
   .sunflower-svg {
     max-width: 850px;
     max-height: 850px;
     width: 100%;
-    margin-top: -80px; 
     overflow: visible;
     z-index: 10;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08)); /* subtle depth */
   }
 
   .light-cone {
@@ -78,7 +129,7 @@ layout: default
     cursor: pointer;
     background: none;
     border: none;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #FBC02D;
     transition: transform 0.3s ease, color 0.3s ease;
     outline: none;
@@ -96,7 +147,7 @@ layout: default
   .petal-outline {
     fill: var(--petal-fill, #fff);
     stroke: #1a1a1a;
-    stroke-width: var(--stroke-width, 2px);
+    stroke-width: var(--stroke-width, 0.8px);
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: fill 0.3s ease, stroke-width 0.3s ease;
@@ -105,32 +156,33 @@ layout: default
   .petal-crease {
     fill: none;
     stroke: #1a1a1a;
-    stroke-width: 1;
+    stroke-width: 0.6;
     opacity: 0.5;
   }
 
   .petal-interactive:hover {
-    --petal-fill: #FFD600;
+    --petal-fill: var(--accent-yellow);
   }
 
   .petal-nav {
     cursor: pointer;
-    --stroke-width: 4px;
-    --petal-fill: #FFF9C4;
+    --stroke-width: 0.8px;
+    --petal-fill: var(--pale-yellow);
   }
 
   .petal-decorative {
     cursor: default;
-    --stroke-width: 1.5px;
+    --stroke-width: 0.8px;
   }
   .petal-decorative .petal-outline {
-     fill: #f9f9f9; 
+     --petal-fill: #f9f9f9; 
   }
 
   .connector-line {
     stroke: #1a1a1a;
-    stroke-width: 2.5;
-    stroke-dasharray: 4 2;
+    stroke-width: 0.5; /* much thinner */
+    stroke-dasharray: 3 4; /* lighter dash pattern */
+    opacity: 0.25; /* barely visible */
     transition: stroke 0.3s ease;
   }
   
@@ -139,30 +191,38 @@ layout: default
   }
 
   .nav-label {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    fill: #333;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: fill 0.3s ease;
+    font-family: 'Crimson Text', 'EB Garamond', Georgia, serif; /* gothic-elegant serif */
+    font-size: 16px; /* smaller, more refined */
+    font-weight: 400; /* much lighter weight */
+    fill: #3a3a3a;
+    text-transform: none; /* remove uppercase for elegance */
+    letter-spacing: 1.2px; /* increased spacing for refinement */
+    font-style: italic; /* optional: adds delicacy */
+    transition: fill 0.1s ease, font-weight 0.1s ease, letter-spacing 0.1s ease;;
   }
   
   [data-theme="dark"] .nav-label {
-    fill: #f0f0f0;
+    fill: #b8b8b8;
   }
 
   .petal-nav:hover .connector-line {
-    stroke: #FBC02D;
+    stroke: var(--accent-yellow);
     stroke-dasharray: 0;
   }
   
   .petal-nav:hover .nav-label {
-     fill: #FFD600;
+      fill: #1a1a1a; /* darker, more visible */
+      font-weight: 600; /* slightly bolder */
+      letter-spacing: 1.5px; /* subtle expansion */
+  }
+
+  [data-theme="dark"] .petal-interactive:hover .nav-label {
+    fill: #e8e8e8;
+    font-weight: 600;
   }
   
   .petal-base-filler {
-    fill: #FFF9C4;
+    fill: var(--pale-yellow);
     stroke: none;
   }
 
@@ -176,14 +236,11 @@ layout: default
     align-items: center;
     min-height: 100vh;
     padding: 100px 20px 20px;
-    background: var(--global-bg-color, #FDFCF5);
+    background: var(--global-bg-color);
     transition: background 0.5s ease;
   }
   
-  [data-theme="dark"] .mobile-content-wrapper {
-    background: #000000;
-  }
-  
+
   [data-theme="dark"] .mobile-nav-link {
     color: #f0f0f0;
   }
@@ -212,10 +269,9 @@ layout: default
   }
 
   .mobile-petal-use {
-    fill: #FFF9C4; 
+    --petal-fill: var(--pale-yellow); 
     stroke: #1a1a1a;
     stroke-width: 3px;
-    transition: fill 0.3s ease;
   }
   
   [data-theme="dark"] .mobile-petal-use {
@@ -236,26 +292,31 @@ layout: default
 
   .mobile-nav-item:hover .mobile-petal-use,
   .mobile-nav-item:active .mobile-petal-use {
-    fill: #FFD600;
+    --petal-fill: var(--accent-yellow) !important;
   }
 
-  .mobile-nav-item:hover .mobile-nav-link,
-  .mobile-nav-item:active .mobile-nav-link {
-    color: #FFD600;
+  .mobile-nav-item:hover a .mobile-nav-link,
+  .mobile-nav-item:active a .mobile-nav-link {
+    color: var(--accent-yellow);
   }
 
 </style>
 
 <div id="main" role="main" style="width: 100%;">
   
-  {% assign labels = "About,Publications,Talks,Teaching,Portfolio,Blog Posts,CV,Guide" | split: "," %}
-  {% assign urls = "/about/,/publications/,/talks/,/teaching/,/portfolio/,/year-archive/,/cv/,/markdown/" | split: "," %}
+  {% assign labels = "Alisa,Research,Publications,Teaching,Projects,Blog,CV,Fun!" | split: "," %}
+  {% assign urls = "/alisa/,/research/,/publications/,/teaching/,/projects/,/blog/,/cv/,/fun/" | split: "," %}
 
   <button id="sunflower-theme-toggle" class="custom-theme-toggle" aria-label="Toggle Dark Mode">
     <i class="fa-solid fa-sun"></i>
   </button>
-  
+
   <div class="light-cone"></div>
+
+  <!-- <div class="site-header">
+    <h1 class="site-greeting">Welcome<span class="heart">♥</span></h1>
+  </div> -->
+  
 
   <!-- MOBILE NAVIGATION -->
   <div class="mobile-content-wrapper">
@@ -302,15 +363,31 @@ layout: default
 
       <!-- DENSE BACKGROUND PETALS (20 petals, every 18 deg) -->
       <g class="bg-layer" transform="translate(400, 400)">
+        {% assign nav_angles = "0,36,72,108,144,180,216,252,288,324" | split: "," %}
+        {% assign min_spacing = 15 %}
         {% for i in (0..19) %}
           {% assign angle = i | times: 18 %}
           {% assign type = i | modulo: 4 %}
+          {% assign skip = false %}
+          {% for nav_angle_str in nav_angles %}
+            {% assign nav_angle = nav_angle_str | plus: 0 %}
+            {% assign diff = angle | minus: nav_angle | abs %}
+            {% if diff > 180 %}
+              {% assign diff = 360 | minus: diff %}
+            {% endif %}
+            {% if diff < min_spacing %}
+              {% assign skip = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% unless skip %}
           <g transform="rotate({{ angle }})" class="petal-interactive petal-decorative">
             {% if type == 0 %}<use href="#petal-symmetric" transform="translate(0,-35)" />{% endif %}
             {% if type == 1 %}<use href="#petal-wide" transform="translate(0,-35)" />{% endif %}
             {% if type == 2 %}<use href="#petal-curved-left" transform="translate(0,-35)" />{% endif %}
             {% if type == 3 %}<use href="#petal-curved-right" transform="translate(0,-35)" />{% endif %}
           </g>
+          {% endunless %}
         {% endfor %}
       </g>
 
@@ -318,64 +395,67 @@ layout: default
       <a href="{{ base_path }}{{ urls[0] }}">
         <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(0)">
           <use href="#petal-symmetric" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" />
-          <text transform="rotate(0, 0, -235)" x="0" y="-235" dy="-10" text-anchor="middle" class="nav-label">{{ labels[0] }}</text>
+          <!-- <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(0, 0, -235)" x="0" y="-200" dy="-10" text-anchor="middle" class="nav-label">{{ labels[0] }}</text>
         </g>
       </a>
       <a href="{{ base_path }}{{ urls[1] }}">
-        <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(36)">
+        <g class="petal-interactive petal-decorative" transform="translate(400,400) rotate(36)">
           <use href="#petal-curved-right" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="-5" y1="-185" x2="-5" y2="-235" class="connector-line" />
-          <text transform="rotate(-36, -5, -235)" x="-5" y="-235" dx="15" dominant-baseline="middle" text-anchor="start" class="nav-label">{{ labels[1] }}</text>
+          <!-- <line x1="-5" y1="-185" x2="-5" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(-36, -5, -235)" x="-30" y="-213" dominant-baseline="middle" text-anchor="start" class="nav-label"></text>
         </g>
       </a>
       <a href="{{ base_path }}{{ urls[2] }}">
         <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(72)">
           <use href="#petal-curved-left" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="5" y1="-185" x2="5" y2="-235" class="connector-line" />
-          <text transform="rotate(-72, 5, -235)" x="5" y="-235" dx="15" dominant-baseline="middle" text-anchor="start" class="nav-label">{{ labels[2] }}</text>
+          <!-- <line x1="5" y1="-185" x2="5" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(-72, 5, -235)" x="-35" y="-225" dx="15" dominant-baseline="middle" text-anchor="start" class="nav-label">{{ labels[1] }}</text>
         </g>
       </a>
       <a href="{{ base_path }}{{ urls[3] }}">
         <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(108)">
           <use href="#petal-wide" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" />
-          <text transform="rotate(-108, 0, -235)" x="0" y="-235" dx="15" dominant-baseline="middle" text-anchor="start" class="nav-label">{{ labels[3] }}</text>
+          <!-- <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(-108, 0, -235)" x="-40" y="-240" dx="15" dominant-baseline="middle" text-anchor="start" class="nav-label">{{ labels[2] }}</text>
         </g>
       </a>
       <a href="{{ base_path }}{{ urls[4] }}">
         <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(144)">
           <use href="#petal-symmetric" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" />
-          <text transform="rotate(-144, 0, -235)" x="0" y="-235" dx="15" dominant-baseline="middle" text-anchor="start" class="nav-label">{{ labels[4] }}</text>
+          <!-- <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(-144, 0, -235)" x="-35" y="-245" dx="15" dominant-baseline="middle" text-anchor="start" class="nav-label">{{ labels[3] }}</text>
         </g>
       </a>
       <a href="{{ base_path }}{{ urls[5] }}">
         <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(180)">
           <use href="#petal-curved-right" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="-5" y1="-185" x2="-5" y2="-235" class="connector-line" />
-          <text transform="rotate(-180, -5, -235)" x="-5" y="-235" dy="25" dominant-baseline="hanging" text-anchor="middle" class="nav-label">{{ labels[5] }}</text>
+          <!-- <line x1="-5" y1="-185" x2="-5" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(-180, -5, -235)" x="0" y="-280" dy="25" dominant-baseline="hanging" text-anchor="middle" class="nav-label">{{ labels[4] }}</text>
         </g>
       </a>
       <a href="{{ base_path }}{{ urls[6] }}">
         <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(216)">
           <use href="#petal-curved-left" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="5" y1="-185" x2="5" y2="-235" class="connector-line" />
-          <text transform="rotate(-216, 5, -235)" x="5" y="-235" dx="-15" dominant-baseline="middle" text-anchor="end" class="nav-label">{{ labels[6] }}</text>
+          <!-- <line x1="5" y1="-185" x2="5" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(-216, 5, -235)" x="35" y="-245" dx="-15" dominant-baseline="middle" text-anchor="end" class="nav-label">{{ labels[5] }}</text>
         </g>
       </a>
       <a href="{{ base_path }}{{ urls[7] }}">
         <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(252)">
           <use href="#petal-wide" class="petal-outline" transform="translate(0,-35)" />
-          <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" />
-          <text transform="rotate(-252, 0, -235)" x="0" y="-235" dx="-15" dominant-baseline="middle" text-anchor="end" class="nav-label">{{ labels[7] }}</text>
+          <!-- <line x1="0" y1="-185" x2="0" y2="-235" class="connector-line" /> -->
+          <text transform="rotate(-252, 0, -235)" x="40" y="-240" dx="-15" dominant-baseline="middle" text-anchor="end" class="nav-label">{{ labels[6] }}</text>
         </g>
       </a>
-      <g class="petal-interactive petal-decorative" transform="translate(400,400) rotate(288)">
-         <use href="#petal-curved-left" class="petal-outline" transform="translate(0,-35)" />
+      <!-- CHANGE TO petal-nav IF YOU WANT TO USE -->
+      <g class="petal-interactive petal-nav" transform="translate(400,400) rotate(288)">
+         <use href="#petal-curved-left" transform="translate(0,-35)" />
+         <text transform="rotate(-288, 0, -235)" x="10" y="-230" dx="15" dominant-baseline="middle" text-anchor="end" class="nav-label">{{ labels[7] }}</text> 
       </g>
       <g class="petal-interactive petal-decorative" transform="translate(400,400) rotate(324)">
-         <use href="#petal-wide" class="petal-outline" transform="translate(0,-35)" />
+         <use href="#petal-wide" transform="translate(0,-35)" />
+         <text transform="rotate(-324, 0, -235)" x="40" y="-225" dx="-15" dominant-baseline="middle" text-anchor="end" class="nav-label"></text>
       </g>
 
       <!-- Center Disk -->
