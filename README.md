@@ -1,6 +1,6 @@
 # floral-web
 
-Based on Academic Pages template.
+Based on the Academic Pages template.
 
 ## Configuration
 
@@ -128,3 +128,6 @@ The easiest way to run the site is using **Docker Compose**. This ensures all Ru
 
 The environment is set up to watch for file changes. When you edit a file on your host machine, the site will automatically rebuild inside the container.
 
+## Troubleshooting
+
+If your site is served with a baseurl (e.g. `<username>.github.io/<repository-name>`), then you should always reference images within posts using the pattern `{{ base_path }}/images/<image-path>`. Otherwise the image will not be found! Same goes for assets and files.
