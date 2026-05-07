@@ -2,7 +2,19 @@
 
 Based on Academic Pages template.
 
-## Adding Content
+## Configuration
+
+* **Site Settings:** General settings like site title and theme are in `_config.yml`.
+* **Sidebar Profile:** Edit `author` information in `_config.yml`.
+* **Navigation Menu:** Edit `_data/navigation.yml` to add or remove links from the top header. Adding a new page also might mean adding a collection in `_config.yml` and adding a page in `_pages`. 
+
+This repo has a Github Action that will build the site into the `gh-pages` branch. Configure Github Pages to serve the website off of this branch.
+
+## Petals
+
+Adding/removing petals requires some tedious shuffling of class assignments and urls/labels in `_layouts/sunflower_home.html`. There are comments in the source to help.
+
+## Posts
 
 This site uses Jekyll collections and data files to manage content. To add new items, create Markdown files in the corresponding directories with the appropriate front matter.
 
@@ -97,15 +109,6 @@ Whatever you'd **wish**
 * **Images:** Upload to `images/`. Reference as `/images/your-image.png`.
 * **PDFs/Docs:** Upload to `files/`. Reference as `/files/your-file.pdf`.
 
-## Configuration
-
-* **Site Settings:** General settings like site title and theme are in `_config.yml`.
-* **Sidebar Profile:** Edit `author` information in `_config.yml`.
-* **Navigation Menu:** Edit `_data/navigation.yml` to add or remove links from the top header. Adding a new page also might mean adding a collection in `_config.yml` and adding a page in `_pages`. 
-
-## Petals
-
-Adding/removing petals requires some tedious shuffling of class assignments and urls/labels in `_layouts/sunflower_home.html`. There are comments in the source to help.
 
 ## Development
 
