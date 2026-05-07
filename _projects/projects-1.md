@@ -5,3 +5,5 @@ collection: projects
 ---
 
 This is a project!
+
+Look here: ![alt]({{ base_path }}/images/profile.png)
