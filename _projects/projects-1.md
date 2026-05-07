@@ -1,6 +1,7 @@
 ---
 title: "Project 1"
-excerpt: "Short description<br/><img src='/images/500x300.png'>"
+excerpt: "Short description"
+excerpt_image: "500x300.png"
 collection: projects
 ---
 
