@@ -1,8 +1,8 @@
 ---
-permalink: /alisa/
+permalink: /name/
 title: "About me"
 layout: single
 author_profile: true
 ---
 
-Hi, I'm Alisa!!!!
+Hi, I'm Name!!!!
